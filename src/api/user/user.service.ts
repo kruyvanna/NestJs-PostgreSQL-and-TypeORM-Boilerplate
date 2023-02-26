@@ -14,11 +14,6 @@ export class UserService {
   }
 
   public createUser(body: CreateUserDto): Promise<User> {
-    const user: User = new User();
-
-    user.name = body.name;
-    user.email = body.email;
-
-    return this.repository.save(user);
+    return this.repository.save(body);
   }
 }
