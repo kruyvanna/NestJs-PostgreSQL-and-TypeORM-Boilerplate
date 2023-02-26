@@ -2,6 +2,11 @@
 
 Boilerplate for NestJs and TypeORM with PostgreSQL
 
+## Implemented
+
+- User authentication
+- env (Environment Variable)
+
 ## Installation
 
 ```bash
