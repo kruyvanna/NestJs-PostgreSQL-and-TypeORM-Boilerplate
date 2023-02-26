@@ -8,8 +8,8 @@ import {
 
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { UserService } from 'src/api/user/user.service';
-import { User } from 'src/api/user/user.entity';
+import { UserService } from 'src/api/users/user.service';
+import { User } from 'src/api/users/user.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

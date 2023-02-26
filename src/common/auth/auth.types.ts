@@ -1,4 +1,4 @@
-import { User } from 'src/api/user/user.entity';
+import { User } from 'src/api/users/user.entity';
 
 export type SanitizedUser = Pick<User, 'username' | 'name' | 'role' | 'id'>;
 

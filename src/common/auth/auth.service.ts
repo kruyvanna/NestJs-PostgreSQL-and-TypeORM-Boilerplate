@@ -5,7 +5,7 @@ import { JwtPayload, SanitizedUser } from './auth.types';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from 'src/api/user/user.service';
+import { UserService } from 'src/api/users/user.service';
 
 export interface Payload {
   username: string;
