@@ -25,14 +25,12 @@ export class UserService {
     return this.repository.save(body);
   }
 
-  async isUserIdValid(id: string) {
-    // TODO: implement this
-    return true;
-
-    // const user = await this.userModel.findById(id).exec();
-    // if (user && user.revoked === false) {
-    //   return true;
-    // }
-    // return false;
+  async isUserIdValid(id: number) {
+    const user = await this.repository.findOne({ where: { id } });
+    if (user && user.revoked === false) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

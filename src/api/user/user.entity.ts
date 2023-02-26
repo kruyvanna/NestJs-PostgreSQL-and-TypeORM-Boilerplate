@@ -29,6 +29,9 @@ export class User {
   @Column({ type: 'boolean', default: false })
   public isDeleted: boolean;
 
+  @Column({ type: 'boolean', default: false })
+  public revoked: boolean;
+
   /*
    * Create and Update Date Columns
    */

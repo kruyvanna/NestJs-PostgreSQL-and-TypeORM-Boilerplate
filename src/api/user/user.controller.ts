@@ -79,6 +79,7 @@ export class UserController {
     return this.authService.login(sanitizedUser);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   public getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.getUser(id);
