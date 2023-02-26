@@ -15,7 +15,7 @@ export class MembersService {
   private readonly photoRepository: Repository<Photo>;
 
   public getMember(id: number): Promise<Member> {
-    return this.repository.findOne({ where: { id } });
+    return this.repository.findOne({ where: { id }, relations: ['photos'] });
   }
 
   public createMember(body: CreateMemberDto): Promise<Member> {
@@ -30,9 +30,7 @@ export class MembersService {
     await this.photoRepository.save(photo);
 
     const savedMember = this.repository.find({
-      relations: {
-        photos: true,
-      },
+      relations: ['photos'],
     });
 
     return savedMember;
