@@ -6,12 +6,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { AuthService } from './auth.service';
 import { ConfigService } from '@nestjs/config';
-import { JwtPayload } from './auth.types';
 import { PassportStrategy } from '@nestjs/passport';
-import { UserDocument } from 'src/users/user.schema';
-import { UserService } from 'src/users/users.service';
+import { UserService } from 'src/api/user/user.service';
+import { User } from 'src/api/user/user.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -31,7 +29,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   // Hence, this pattern of sub-classing and implementing strategy-specific
   // validation is consistent, elegant and extensible.
 
-  async validate(payload): Promise<UserDocument> {
+  async validate(payload): Promise<User> {
     const { id } = payload;
     const isUserValid = await this.userService.isUserIdValid(id);
     if (!isUserValid) {

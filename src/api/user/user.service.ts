@@ -13,7 +13,26 @@ export class UserService {
     return this.repository.findOne({ where: { id } });
   }
 
+  public getUserByUsername(username: string): Promise<User> {
+    return this.repository.findOne({ where: { username } });
+  }
+
+  public findById(id: number): Promise<User> {
+    return this.repository.findOne({ where: { id } });
+  }
+
   public createUser(body: CreateUserDto): Promise<User> {
     return this.repository.save(body);
+  }
+
+  async isUserIdValid(id: string) {
+    // TODO: implement this
+    return true;
+
+    // const user = await this.userModel.findById(id).exec();
+    // if (user && user.revoked === false) {
+    //   return true;
+    // }
+    // return false;
   }
 }

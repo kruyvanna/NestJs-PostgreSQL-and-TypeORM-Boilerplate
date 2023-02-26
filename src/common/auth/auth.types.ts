@@ -1,11 +1,8 @@
-import { UserDocument } from 'src/users/user.schema';
+import { User } from 'src/api/user/user.entity';
 
-export type SanitizedUser = Pick<
-  UserDocument,
-  'username' | 'name' | 'role' | '_id' | 'id'
->;
+export type SanitizedUser = Pick<User, 'username' | 'name' | 'role' | 'id'>;
 
 export type JwtPayload = {
   username: string;
-  id: string;
+  id: number;
 };

@@ -5,9 +5,7 @@ import { JwtPayload, SanitizedUser } from './auth.types';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserDocument } from 'src/users/user.schema';
-import { UserService } from 'src/users/users.service';
-import { sign } from 'jsonwebtoken';
+import { UserService } from 'src/api/user/user.service';
 
 export interface Payload {
   username: string;
@@ -20,9 +18,9 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, pass: string): Promise<SanitizedUser> {
-    const user = await this.userService.findOne(username).exec();
+    const user = await this.userService.getUserByUsername(username);
     if (user && (await bcrypt.compare(pass, user.password))) {
-      const { password, ...result } = user.toObject();
+      const { password, ...result } = user;
       return result;
     }
     return null;
@@ -33,7 +31,7 @@ export class AuthService {
   async login(
     user: SanitizedUser,
   ): Promise<{ user: SanitizedUser; token: { id: string } }> {
-    const payload: JwtPayload = { username: user.username, id: user._id };
+    const payload: JwtPayload = { username: user.username, id: user.id };
     return {
       user,
       token: { id: this.jwtService.sign(payload) },
