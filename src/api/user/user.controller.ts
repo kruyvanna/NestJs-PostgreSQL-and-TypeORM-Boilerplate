@@ -20,6 +20,8 @@ import { AuthService } from 'src/common/auth/auth.service';
 export class UserController {
   @Inject(UserService)
   private readonly service: UserService;
+
+  @Inject(AuthService)
   private readonly authService: AuthService;
 
   @Get(':id')
