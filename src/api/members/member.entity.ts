@@ -4,7 +4,9 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Photo } from './photo.entity';
 
 @Entity()
 export class Member {
@@ -16,6 +18,9 @@ export class Member {
 
   @Column({ type: 'boolean', default: false })
   public isDeleted: boolean;
+
+  @OneToMany(() => Photo, (photo) => photo.member)
+  photos: Photo[];
 
   /*
    * Create and Update Date Columns

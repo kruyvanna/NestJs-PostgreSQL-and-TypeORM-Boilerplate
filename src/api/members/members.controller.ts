@@ -10,6 +10,7 @@ import {
 import { CreateMemberDto } from './member.dto';
 import { Member } from './member.entity';
 import { MembersService } from './members.service';
+import { CreatePhotoDto } from './photo.dto';
 
 @Controller('members')
 export class MembersController {
@@ -21,8 +22,12 @@ export class MembersController {
     return this.service.getMember(id);
   }
 
+  @Post(':id/photos')
   @Post()
-  public createUser(@Body() body: CreateMemberDto): Promise<Member> {
-    return this.service.createMember(body);
+  public addPhoto(
+    @Body() body: CreatePhotoDto,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.service.addPhoto(id, body);
   }
 }
