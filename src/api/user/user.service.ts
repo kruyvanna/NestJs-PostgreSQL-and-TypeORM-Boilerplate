@@ -22,7 +22,6 @@ export class UserService {
   }
 
   public createUser(body: CreateUserDto): Promise<User> {
-    console.log('createUser body :', body);
     return this.repository.save(body);
   }
 
