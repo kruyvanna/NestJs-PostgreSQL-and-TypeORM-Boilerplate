@@ -30,11 +30,11 @@ export class AuthService {
   // should return appropriate response
   async login(
     user: SanitizedUser,
-  ): Promise<{ user: SanitizedUser; token: { id: string } }> {
+  ): Promise<{ user: SanitizedUser; token: string }> {
     const payload: JwtPayload = { username: user.username, id: user.id };
     return {
       user,
-      token: { id: this.jwtService.sign(payload) },
+      token: this.jwtService.sign(payload),
     };
   }
 }
