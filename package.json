@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "ENV=prod node dist/src/main",
     "typeorm": "typeorm-ts-node-commonjs",
     "typeorm:generate-migration": "npx typeorm-ts-node-commonjs migration:generate src/migrations/Migration -d ./ormDatasource.ts",
     "typeorm:run-migration": "npx typeorm-ts-node-commonjs migration:run -d ./ormDatasource.ts",
