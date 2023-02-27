@@ -8,7 +8,10 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   private readonly config: ConfigService;
 
   public createTypeOrmOptions(): TypeOrmModuleOptions {
-    return {
+    const useSslString = this.config.get<string>('USE_SSL');
+    const useSsl = useSslString === 'true';
+
+    let connectionOptions: any = {
       type: 'postgres',
       host: this.config.get<string>('DATABASE_HOST'),
       port: this.config.get<number>('DATABASE_PORT'),
@@ -20,12 +23,17 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       migrationsTableName: 'typeorm_migrations',
       logger: 'file',
       synchronize: true, // never use TRUE in production!
-      ssl: true,
-      extra: {
+      ssl: useSsl,
+    };
+
+    if (useSsl === true) {
+      connectionOptions.extra = {
         ssl: {
           rejectUnauthorized: false,
         },
-      },
-    };
+      };
+    }
+    // @ts-ignore
+    return connectionOptions;
   }
 }
